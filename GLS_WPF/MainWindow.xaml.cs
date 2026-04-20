@@ -56,5 +56,25 @@ namespace GLS_WPF
             dtgTabla.Items.Refresh();
 
         }
+
+        private void dtgTabla_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var elem = dtgTabla.SelectedItem as AutoAdatok;
+            if (elem != null) {
+                tbxNev.Text = elem.SoforNeve;
+                tbxCsomagokSzama.Text = elem.KezbesitettCsomagokSzama.ToString();
+                tbxDatum.Text = elem.Datum.ToString();
+                tbxKm.Text = elem.NapiKilometer.ToString();
+                tbxLiterFogyasztas.Text = elem.NapiFogyasztasLiterben.ToString();
+            }
+
+
+        }
+
+        private void btnModositas_Click(object sender, RoutedEventArgs e)
+        {
+            Program.autoAdatokKollekcio[dtgTabla.SelectedIndex].Modositjuk(new AutoAdatok($"{tbxDatum.Text};{tbxNev.Text};{tbxKm.Text};{tbxCsomagokSzama.Text};{tbxLiterFogyasztas.Text}"));
+            dtgTabla.Items.Refresh();
+        }
     }
 }

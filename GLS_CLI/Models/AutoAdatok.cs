@@ -27,6 +27,15 @@ namespace GLS_CLI.Models
             NapiFogyasztasLiterben = int.Parse(temps[4]);
         }
 
+        public void Modositjuk(AutoAdatok autoAdatok)
+        {
+            Datum = autoAdatok.Datum;
+            SoforNeve = autoAdatok.SoforNeve;
+            NapiKilometer = autoAdatok.NapiKilometer;
+            KezbesitettCsomagokSzama = autoAdatok.KezbesitettCsomagokSzama;
+            NapiFogyasztasLiterben = autoAdatok.NapiFogyasztasLiterben;
+        }
+
         public DateTime Datum { get; private set; }
         public string SoforNeve { get; private set; }
         public int NapiKilometer { get; private set; }
