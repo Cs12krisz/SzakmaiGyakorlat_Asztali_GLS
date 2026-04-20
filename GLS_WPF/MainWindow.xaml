@@ -23,10 +23,10 @@
             <Label Content="Fogyasztás (l/100 km)"/>
             <TextBox x:Name="tbxLiterFogyasztas"/>
             <Label Content="km"/>
-            <TextBox x:Name="tbxKm"/>
-            <Button x:Name="btnFelvitel" Content="Felvitel" Click="btnFelvitel_Click"/>
-            <Button x:Name="btnModositas" Content="Módosítás" Click="btnModositas_Click"/>
-            <Button x:Name="btnMentés" Content="Mentés"/>
+            <TextBox x:Name="tbxKm" Margin="0 0 0 15"/>
+            <Button x:Name="btnFelvitel" Content="Felvitel" Click="btnFelvitel_Click" Margin="0 0 0 15"/>
+            <Button x:Name="btnModositas" Content="Módosítás" Click="btnModositas_Click" Margin="0 0 0 15"/>
+            <Button x:Name="btnMentés" Content="Mentés" Click="btnMentés_Click" Margin="0 0 0 15"/>
         </StackPanel>
     </Grid>
 </Window>

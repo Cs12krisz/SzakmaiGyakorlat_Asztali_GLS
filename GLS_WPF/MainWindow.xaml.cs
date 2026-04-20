@@ -1,5 +1,7 @@
 ﻿using GLS_CLI;
 using GLS_CLI.Models;
+using Microsoft.Win32;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -73,8 +75,52 @@ namespace GLS_WPF
 
         private void btnModositas_Click(object sender, RoutedEventArgs e)
         {
-            Program.autoAdatokKollekcio[dtgTabla.SelectedIndex].Modositjuk(new AutoAdatok($"{tbxDatum.Text};{tbxNev.Text};{tbxKm.Text};{tbxCsomagokSzama.Text};{tbxLiterFogyasztas.Text}"));
-            dtgTabla.Items.Refresh();
+            if (Validator())
+            {
+                Program.autoAdatokKollekcio[dtgTabla.SelectedIndex].Modositjuk(new AutoAdatok($"{tbxDatum.Text};{tbxNev.Text};{tbxKm.Text};{tbxCsomagokSzama.Text};{tbxLiterFogyasztas.Text}"));
+                dtgTabla.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Már rögzített adatok a kiválasztott dátumra", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+
+        private bool Validator()
+        {
+            DateTime datum;
+            int literFogyasztas, kmNapi;
+            if (tbxNev.Text == "" || (tbxDatum.Text == "" && !DateTime.TryParse(tbxDatum.Text, out datum)) || (tbxLiterFogyasztas.Text == "" && !int.TryParse(tbxLiterFogyasztas.Text, out literFogyasztas) && literFogyasztas <= 0) || (tbxKm.Text == "" && !int.TryParse(tbxKm.Text, out kmNapi) && kmNapi <= 0))
+            {
+                MessageBox.Show("Már rözített adatok, vagy hibás adatok");
+                return false;
+            }
+            return true;
+        }
+
+        private void btnMentés_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.FileName = "gls.txt";
+                if (sfd.ShowDialog() == true)
+                {
+                    StreamWriter sw = new StreamWriter(sfd.FileName);
+                    foreach (var item in Program.autoAdatokKollekcio)
+                    {
+                        sw.WriteLine($"{item.Datum};{item.SoforNeve};{item.NapiKilometer};{item.KezbesitettCsomagokSzama};{item.NapiFogyasztasLiterben}");
+                    }
+                    sw.Close();
+                    MessageBox.Show("Sikeres mentés");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
