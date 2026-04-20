@@ -1,0 +1,32 @@
+﻿<Window x:Class="GLS_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GLS_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dtgTabla"/>
+        <StackPanel Grid.Column="1">
+            <Label Content="Dátum"/>
+            <TextBox x:Name="tbxDatum"/>
+            <Label Content="Név"/>
+            <TextBox x:Name="tbxNev"/>
+            <Label Content="Csomagok száma"/>
+            <TextBox x:Name="tbxCsomagokSzama"/>
+            <Label Content="Fogyasztás (l/100 km)"/>
+            <TextBox x:Name="tbxLiterFogyasztas"/>
+            <Label Content="km"/>
+            <TextBox x:Name="tbxKm"/>
+            <Button x:Name="btnFelvitel" Content="Felvitel" Click="btnFelvitel_Click"/>
+            <Button x:Name="btnModositas" Content="Módosítás"/>
+            <Button x:Name="btnMentés" Content="Mentés"/>
+        </StackPanel>
+    </Grid>
+</Window>
